@@ -1,0 +1,37 @@
+<!doctype html>
+<style type='text/css'>
+  #popup {
+    padding: 10px;
+    height: 100px;
+    width: 400px;
+    font-family: Helvetica, Ubuntu, Arial, sans-serif;
+    font-size: 20px;
+    text-align: center;
+  }
+  #buy {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80px;
+  }
+  #message {
+    font-size: 16px;
+  }
+  #error {
+    color: red;
+  }
+  #success {
+    color: green;
+  }
+  #buy{}
+
+</style>
+
+<script type='text/javascript' src='../../js/jquery/jquery.min.js'></script>
+<script type='text/javascript' src='browser_action.js'></script>
+
+<div id='popup'>
+  <div id='confirmation'></div>
+  <div id='error'></div>
+  <div id='success'></div>
+  <button id='buy'>Confirm</button>
+</div>

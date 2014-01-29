@@ -1,0 +1,201 @@
+<html>
+  <head>
+    <title>User Settings</title>
+    <script src="../../js/aes.js"></script>
+    <script src="../../js/jquery/jquery.min.js"></script>
+    <script src="options.js"></script>
+    <link href="options.css" rel="stylesheet"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="creditly.js"></script>
+
+  </head>
+  <body>
+
+  <form id="billing-info-form" class="form-horizontal" method="post" novalidate>
+    <div class="row">
+      <div class="subtitle col-md-12">
+        <div class="col-md-4">Credit Card</div>
+      </div>
+      <div class="payment-details-wrapper col-md-4">
+        <section class="credit-card">
+          <div class="credit-card-wrapper creditly-wrapper">
+            <div class="number form-group">
+              <div class="col-md-8 controls">
+                <label class="control-label">Card Number</label>
+                <input class="form-required number credit_card_number form-control"
+                  type="text" name="number" required
+                  inputmode="numeric" autocomplete="cc-number" autocompletetype="cc-number" x-autocompletetype="cc-number"
+                  placeholder="&#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149;" value="">
+              </div>
+              <div class="col-md-4 controls">
+                <label class="control-label">CVV</label>
+                <input class="form-required security_code form-control" 
+                  type="text" name="security_code" required
+                  placeholder="&#149;&#149;&#149;" value="">
+              </div>
+            </div>
+            <div class="credit-card-second-row form-group">
+              <div class="second-line-card-wrapper">
+                <div class="col-md-8 controls">
+                  <label class="control-label">Name on Card</label>
+                  <input class="form-required billing-address-name form-control"
+                    type="text" name="name" required
+                    placeholder="John Smith" value="">
+                </div>
+                <div class="col-md-4 controls">
+                  <label class="control-label">Expiration</label>
+                  <input class="form-required expiration_month_and_year form-control"
+                    type="text" name="expiration_month_and_year" required
+                    placeholder="MM / YY" value="">
+                </div>
+              </div>
+            </div>
+            <div class="email_address form-group">
+              <div class="col-md-12 controls">
+                <label class="control-label">Email Address</label>
+                <input class="form-required email_address form-control" type="email" name="email_address"
+                  placeholder="johnsmith@gmail.com"
+                  required value="">
+              </div>
+            </div>
+          </div>
+        </section>
+<!--         <div class="security-logos col-md-12">
+          <div class="security-logo-1 col-md-6">
+            <img class="col-md-12" src="img/security-logo-1.png">
+          </div>
+          <div class="security-logo-2 col-md-6">
+            <img class="col-md-12" src="img/security-logo-2.png">
+          </div>
+        </div> -->
+      </div>
+    </div>
+    <!-- <div class="row">
+      <div class="subtitle col-md-12">
+        <div class="col-md-4">Billing Address</div>
+      </div>
+      <div class="col-md-12">
+        <div class="order-information-wrapper col-md-4">
+          <div class="billing-address-information-wrapper">
+            <div class="billing-address-information">
+              <div class="card-billing-address">
+                <div class="address_line1 form-group">
+                  <div class="col-md-12 controls">
+                    <input class="form-required address_line1 form-control" 
+                      type="text" name="billing_address_line1"
+                      placeholder="Street address, P.O. box, company name, c/o"
+                      required value="">
+                  </div>
+                </div>
+                <div class="address_line2 form-group">
+                  <div class="col-md-12 controls">
+                    <input class="address_line2 form-control"
+                      type="text" name="billing_address_line2"
+                      placeholder="Apartment, suite, unit, building, floor, etc." value="">
+                  </div>
+                </div>
+                <div class="city form-group">
+                  <div class="col-md-12 controls">
+                    <input class="form-required city form-control" type="text" name="billing_city"
+                    placeholder="City" value=""
+                    required>
+                  </div>
+                </div>
+                <div class="state zip_code form-group">
+                  <div class="col-md-4 controls">
+                    <input class="form-required city form-control" type="text" name="billing_state"
+                    placeholder="State" value=""
+                    required>
+                  </div>
+                  <div class="col-md-4 controls">
+                    <input class="form-required zip_code form-control" type="text" name="billing_zip_code"
+                    placeholder="Zip Code" value=""
+                    required>
+                  </div>
+                  <div class="col-md-4 controls">
+                    <select class="form-required country form-control" type="text" name="billing_country"
+                      placeholder="State" required>
+                      <option value="">Country</option> 
+                      <option value="US">US</option>
+                      <option value="GB">UK</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="subtitle col-md-12">
+        <div class="col-md-4">Shipping Address</div>
+      </div>
+      <div class="col-md-12">
+        <div class="order-information-wrapper col-md-4">
+          <div class="billing-address-information-wrapper">
+            <div class="billing-address-information">
+              <div class="card-billing-address">
+                <div class="address_line1 form-group">
+                  <div class="col-md-12 controls">
+                    <input class="form-required address_line1 form-control" 
+                      type="text" name="shipping_address_line1"
+                      placeholder="Street address, P.O. box, company name, c/o"
+                      required value="">
+                  </div>
+                </div>
+                <div class="address_line2 form-group">
+                  <div class="col-md-12 controls">
+                    <input class="address_line2 form-control"
+                      type="text" name="shipping_address_line2"
+                      placeholder="Apartment, suite, unit, building, floor, etc." value="">
+                  </div>
+                </div>
+                <div class="city form-group">
+                  <div class="col-md-12 controls">
+                    <input class="form-required city form-control" type="text" name="shipping_city"
+                    placeholder="City" value=""
+                    required>
+                  </div>
+                </div>
+                <div class="state zip_code form-group">
+                  <div class="col-md-4 controls">
+                    <input class="form-required city form-control" type="text" name="shipping_state"
+                    placeholder="State" value=""
+                    required>
+                  </div>
+                  <div class="col-md-4 controls">
+                    <input class="form-required zip_code form-control" type="text" name="shipping_zip_code"
+                    placeholder="Zip Code" value=""
+                    required>
+                  </div>
+                  <div class="col-md-4 controls">
+                    <select class="form-required country form-control" type="text" name="shipping_country"
+                      placeholder="State" required>
+                      <option value="">Country</option> 
+                      <option value="US">US</option>
+                      <option value="GB">UK</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="row submit-wrapper">
+      <div class="col-md-6">
+        <div id="status"></div>
+        <div class="submit-button-col col-md-12 col-md-offset-3">
+          <button id="submit" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+  </body>
+</html>
+

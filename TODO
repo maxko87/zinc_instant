@@ -1,0 +1,12 @@
+DONE - screenshot current page
+DONE - email us on submission
+DONISH- cool regex to pull item name and price across most stores
+DONE - change icon appearance on pages that allow one click buy!
+- nice icon
+- make things look good (angela)
+- instructions
+
+future:
+- password protect everything
+- programmatic injection into all pages that have "buy"-esque button
+- trigger changes to popup on any ajax request?
