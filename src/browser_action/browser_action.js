@@ -2,11 +2,20 @@ $(document).ready(function(){
 
   console.log('browser_action.js');
 
+  // TODO: refactor
+  safe_get = function(key){
+    var ciphertext = localStorage[key];
+    if (!ciphertext)
+      return;
+    var plaintext = CryptoJS.AES.decrypt(ciphertext, chrome.extension.getBackgroundPage().pw);
+    return JSON.parse(plaintext.toString(CryptoJS.enc.Utf8));
+  }
+
   show_success = function(text) {
     $('#success').text(text);
     setTimeout(function() {
       $('#success').text("");
-    }, 3000);
+    }, 5000);
   };
 
   show_error = function(text) {
@@ -29,7 +38,7 @@ $(document).ready(function(){
     // MAKE API CALL
     chrome.tabs.captureVisibleTab(null, {}, function (image) {
       process_current_tab(function(tab) {
-        user_info = localStorage.getItem("user_info");
+        user_info = safe_get("user_info");
         if (!user_info){
           show_error("You must enter your payment and shipping information in the extension options before you can place an order!");
           return;
