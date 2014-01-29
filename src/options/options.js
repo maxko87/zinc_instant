@@ -22,20 +22,17 @@ form_is_populated = function(form_selector) {
 };
 
 safe_put = function(key, val){
-  console.log(chrome.extension.getBackgroundPage().pw);
   var plaintext = JSON.stringify(val);
   var ciphertext = CryptoJS.AES.encrypt(plaintext, chrome.extension.getBackgroundPage().pw);
   localStorage[key] = ciphertext;
 }
 
 safe_get = function(key){
-  console.log(chrome.extension.getBackgroundPage().pw);
   var ciphertext = localStorage[key];
   if (!ciphertext)
     return;
   var plaintext = CryptoJS.AES.decrypt(ciphertext, chrome.extension.getBackgroundPage().pw);
-  console.log(plaintext);
-  return JSON.parse(plaintext.toString());
+  return JSON.parse(plaintext.toString(CryptoJS.enc.Utf8));
 }
 
 function save_options() {
@@ -72,4 +69,9 @@ document.addEventListener("DOMContentLoaded", restore_options);
 
 $(function() {
   document.querySelector('#submit').addEventListener('click', save_options);
+  // var a = "hello";
+  // var ciphertext = CryptoJS.AES.encrypt(a, "hi");
+  // console.log(ciphertext.toString());
+  // var plaintext = CryptoJS.AES.decrypt(ciphertext, "hi");
+  // console.log(plaintext.toString(CryptoJS.enc.Utf8));
 });
