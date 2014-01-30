@@ -1,5 +1,5 @@
-DOMAIN = "localhost:5000";
-// DOMAIN = "api.zinc.io";
+// DOMAIN = "http://localhost:5000";
+DOMAIN = "https://api.zinc.io";
 
 $(document).ready(function(){
 
@@ -51,7 +51,7 @@ $(document).ready(function(){
         }
         data = {'email': email, 'password': password, "image": image, "product_data": product_data, "url": tab.url};
         console.log(JSON.stringify(data));
-        $.post("http://" + DOMAIN + "/v0/instant_buy", JSON.stringify(data))
+        $.post(DOMAIN + "/v0/instant_buy", JSON.stringify(data))
           .done(function (data){
             if (data['_type'] == 'error'){
               show_error(data['message']);

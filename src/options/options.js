@@ -1,5 +1,5 @@
-DOMAIN = "localhost:5000";
-// DOMAIN = "api.zinc.io";
+// DOMAIN = "http://localhost:5000";
+DOMAIN = "https://api.zinc.io";
 
 get_object_from_form = function(form_selector) {
   var inputs = $(form_selector + " :input");
@@ -69,7 +69,7 @@ save_login = function() {
     password = $('#password').val();
     safe_put('email', email);
     data = {'email': email, 'password': password};
-    $.post("http://" + DOMAIN + "/v0/instant_update_user", JSON.stringify(data))
+    $.post(DOMAIN + "/v0/instant_update_user", JSON.stringify(data))
       .done(function (data){
         console.log(data);
         if (data['_type'] == 'error'){
@@ -92,7 +92,7 @@ save_options = function() {
     $('.spinner').css('display', 'block');
     payload = get_object_from_form("#main-form");
     data = {'email': email, 'password': password, 'payload': payload} // TODO: email and password are global from before
-    $.post("http://" + DOMAIN + "/v0/instant_update_user", JSON.stringify(data))
+    $.post(DOMAIN + "/v0/instant_update_user", JSON.stringify(data))
       .done(function (data){
         $('.spinner').css('display', 'none');
         if (data['_type'] == 'error'){
