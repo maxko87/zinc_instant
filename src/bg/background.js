@@ -1,7 +1,5 @@
 var pw = "0123890128365209132"; // fuckit.js
 
-console.log('background.js');
-
 // get_html_from_jquery = function(jquery){
 //   return "<html>" + $('<div>').append(jquery).html() + "</html>";
 // }

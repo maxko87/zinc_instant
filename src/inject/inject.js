@@ -1,8 +1,8 @@
 console.log('in inject.js');
 
-retailers = ['amazon', 'ebay', 'walmart', 'bestbuy', 'target'];
-title_selectors = ['#title', '#itemTitle','.productTitle', '#sku-title', '.product-name'];
-price_selectors = ['#priceblock_ourprice', '#prcIsum', '.bigPriceText1', '.item-price', '.offerPrice'];
+retailers = ['amazon', 'amazon', 'ebay', 'walmart', 'bestbuy', 'target', 'newegg', 'home_depot', 'zappos', 'gap', 'victorias_secret', 'forever_21', 'net_a_porter', 'shopbop', 'modcloth', 'jcrew'];
+title_selectors = ['#title', '#btAsinTitle', '#itemTitle','.productTitle', '#sku-title', '.product-name', '#grpDescrip_0', '.product_title', '.banner', '.productName', '.name h1', '.product-title', '#product-details h1', '.product-title', '#product-name', '#description h1'];
+price_selectors = ['#priceblock_ourprice', '#actualPriceValue', '#prcIsum', '.bigPriceText1', '.item-price', '.offerPrice', '#singleFinalPrice', '#ajaxPrice', '#priceSlot', '#priceText', '.price p', '.product-price', '#price', '.priceBlock', '#product-price', '.full-price span'];
 
 var title = null;
 var price = null;
@@ -25,7 +25,7 @@ for (var i=0; i<price_selectors.length; i++){
 
 var message = "";
 if (title && price){
-  message = "Purchase " + title + " for " + price + "?";
+  message = "Purchase " + title + " for " + price + " + shipping?";
   chrome.runtime.sendMessage({confirmation: message});
 }
 // else if (title){

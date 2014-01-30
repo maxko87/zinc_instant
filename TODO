@@ -1,12 +1,23 @@
 DONE - screenshot current page
 DONE - email us on submission
-DONISH- cool regex to pull item name and price across most stores
+DONE - cool regex to pull item name and price across most stores
 DONE - change icon appearance on pages that allow one click buy!
-- nice icon
-- make things look good (angela)
-- instructions
+DONE - USE REAL SECURITY
+DONE - password protect order
+DONE - make things look good (angela)
+DONE - country autofill
+DONE - phone number
+DONE - fix order placing
+DONE - updated creditly
+DONE - brighter enabled icon
+DONE - instructions
+DONE - better "information saved! font"
+
 
 future:
-- password protect everything
+- standalone instruction website
+
+to think about:
 - programmatic injection into all pages that have "buy"-esque button
 - trigger changes to popup on any ajax request?
+

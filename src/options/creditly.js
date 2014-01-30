@@ -454,20 +454,3 @@ var Creditly = (function() {
     validate: validate,
   };
 })();
-
-$(function() {
-  var creditly = Creditly.initialize(
-      '.creditly-wrapper .expiration_month_and_year',
-      '.creditly-wrapper .credit_card_number',
-      '.creditly-wrapper .security_code',
-      '.creditly-wrapper .card_type');
-
-  $(".btn-primary").click(function(e) {
-    e.preventDefault();
-    var output = creditly.validate();
-    if (output) {
-      // Your validated credit card output
-      console.log(output);
-    }
-  });
-});

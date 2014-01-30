@@ -2,6 +2,7 @@
   <head>
     <title>User Settings</title>
     <script src="../../js/aes.js"></script>
+    <script src="../../js/sha3.js"></script>
     <script src="../../js/jquery/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="creditly.js"></script>
@@ -23,185 +24,238 @@
 
     <section class="instructions">
       <div class="shopping-cart"><i class="fa fa-shopping-cart"></i></div>
-      <p><strong>Shopping has never been easier.</strong> Here's how to use Zinc Instant to buy anything, anywhere, with one click of your mouse: [instructions here I guess] Cupcake ipsum dolor sit amet. Dessert cotton candy jello toffee gummi bears caramels jello. Sugar plum icing marzipan dessert caramels.</p>
+      <h3>Zinc Instant allows you to buy anything from any online retailer in seconds.</h3>
     </section>
 
-    <form id="billing-info-form" class="form-horizontal" method="post" novalidate>
-      <div class="form-section form-left">
-        <h3>Credit Card</h3>
-        <section class="credit-card">
-          <div class="credit-card-wrapper creditly-wrapper">
-            <div class="form-group">
-              <div class="col-md-8 controls">
-                <label class="control-label">Card Number</label>
-                <input class="form-required number credit_card_number form-control"
-                  type="text" name="number" required
-                  inputmode="numeric" autocomplete="cc-number" autocompletetype="cc-number" x-autocompletetype="cc-number"
-                  placeholder="&#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149;" value="">
-              </div>
-              <div class="col-md-4 controls">
-                <label class="control-label">CVV</label>
-                <input class="form-required security_code form-control"
-                  type="text" name="security_code" required
-                  placeholder="&#149;&#149;&#149;" value="">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-md-8 controls">
-                <label class="control-label">Name on Card</label>
-                <input class="form-required billing-address-name form-control"
-                  type="text" name="name" required
-                  placeholder="John Smith" value="">
-              </div>
-              <div class="col-md-4 controls">
-                <label class="control-label">Expiration</label>
-                <input class="form-required expiration_month_and_year form-control"
-                  type="text" name="expiration_month_and_year" required
-                  placeholder="MM / YY" value="">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-md-12 controls">
-                <label class="control-label">Email Address</label>
-                <input class="form-required email_address form-control" type="email" name="email_address"
-                  placeholder="johnsmith@gmail.com"
-                  required value="">
-              </div>
-            </div>
-          </div>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-1">
+
+        <section class="instructions">
+        <h3>Signing Up</h3>
+          <ol>
+            <li>Go to the Options page of the extension.</li>
+            <li>Create an account with Zinc Instant. Order confirmations will come to this email, and you will use this password to confirm purchases.</li>
+            <li>Enter your billing and shipping information. We store this in our secure, PCI compliant infrastructure.</li>
+          </ol>
+          <h3>Placing Orders</h3>
+          <ol>
+            <li>When you are on a page with an item you can purchase, the extension icon will turn from <img class="icon" src="../../icons/instant_disabled.png"> into <img class="icon" src="../../icons/instant_enabled.png">. This means Zinc Instant is active on that page!</li>
+            <li>Select the quantity of the item you want, as well as the size, color, and other dimensions. 
+            <li>Click on the icon to bring up a confirmation popup. If you are ready to place the order, enter your password and click "Confirm Purchase".</li>
+            <li>You'll receive a confirmation email within the next hour. It's now that easy to place an order online.</li>
+          </ol>
         </section>
-        <!--
-          <div class="security-logos col-md-12">
-            <div class="security-logo-1 col-md-6">
-              <img class="col-md-12" src="img/security-logo-1.png">
-            </div>
-            <div class="security-logo-2 col-md-6">
-              <img class="col-md-12" src="img/security-logo-2.png">
-            </div>
-          </div>
-        -->
+
       </div>
 
-      <div class="form-section form-right">
-        <h3>Billing Address</h3>
-        <div class="order-information-wrapper">
-          <div class="billing-address-information-wrapper">
-            <div class="billing-address-information">
-              <div class="card-billing-address">
-                <div class="address_line1 form-group">
-                  <div class="col-md-12 controls">
-                    <input class="form-required address_line1 form-control"
-                      type="text" name="billing_address_line1"
-                      placeholder="Street address, P.O. box, company name, c/o"
-                      required value="">
+      <div class="col-md-7">
+
+        <div class="spinner">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
+
+        <form id="login-form" class="form-horizontal" method="post" novalidate>
+          <div class="form-section form-center">
+
+            <h3 class="login_or_register">Log in</h3>
+              <div class="form-group">
+                <div class="col-md-12 controls">
+                  <label class="control-label">Email</label>
+                  <input class="form-required form-control" id="email" type="email" name="email" required placeholder="">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-12 controls">
+                  <label class="control-label">Password</label>
+                  <input class="form-required form-control" id="password" type="password" name="password" required><!-- placeholder="&#149;&#149;&#149;&#149;&#149;&#149;&#149;&#149;" -->
+                </div>
+              </div>
+            <div class="row submit-wrapper">
+              <div id="login-status" class="status center"></div>
+              <button id="login-submit" class="fake-button login_or_register center">Login</button>
+            </div>
+          </div>
+        </form>
+
+
+
+        <form id="main-form" class="form-horizontal" method="post" novalidate>
+          <div class="form-section form-center">
+            <h3>Credit Card</h3>
+            <section class="credit-card">
+              <div class="credit-card-wrapper creditly-wrapper">
+                <div class="form-group">
+                  <div class="col-md-8 controls">
+                    <label class="control-label">Card Number</label>
+                    <!-- <div class="card_type"></div> -->
+                    <label class="control-label card_type"></label>
+                    <input class="form-required number credit_card_number form-control"
+                      type="text" name="number" required
+                      inputmode="numeric" autocomplete="cc-number" autocompletetype="cc-number" x-autocompletetype="cc-number"
+                      placeholder="&#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149; &#149;&#149;&#149;&#149;" value="">
+                  </div>
+                  <div class="col-md-4 controls">
+                    <label class="control-label">CVV</label>
+                    <input class="form-required security_code form-control"
+                      type="text" name="security_code" required
+                      placeholder="&#149;&#149;&#149;" value="">
                   </div>
                 </div>
-                <div class="address_line2 form-group">
-                  <div class="col-md-12 controls">
-                    <input class="address_line2 form-control"
-                      type="text" name="billing_address_line2"
-                      placeholder="Apartment, suite, unit, building, floor, etc." value="">
+                <div class="form-group">
+                  <div class="col-md-8 controls">
+                    <label class="control-label">Name on Card</label>
+                    <input class="form-required billing-address-name form-control"
+                      type="text" name="name" required
+                      placeholder="John Smith" value="">
+                  </div>
+                  <div class="col-md-4 controls">
+                    <label class="control-label">Expiration</label>
+                    <input class="form-required expiration_month_and_year form-control"
+                      type="text" name="expiration_month_and_year" required
+                      placeholder="MM / YY" value="">
                   </div>
                 </div>
-                <div class="city form-group">
-                  <div class="col-md-12 controls">
-                    <input class="form-required city form-control" type="text" name="billing_city"
-                    placeholder="City" value=""
-                    required>
-                  </div>
+              </div>
+            </section>
+            <!--
+              <div class="security-logos col-md-12">
+                <div class="security-logo-1 col-md-6">
+                  <img class="col-md-12" src="img/security-logo-1.png">
                 </div>
-                <div class="state zip_code form-group">
-                  <div class="col-md-4 controls">
-                    <input class="form-required city form-control" type="text" name="billing_state"
-                    placeholder="State" value=""
-                    required>
-                  </div>
-                  <div class="col-md-4 controls">
-                    <input class="form-required zip_code form-control" type="text" name="billing_zip_code"
-                    placeholder="Zip Code" value=""
-                    required>
-                  </div>
-                  <div class="col-md-4 controls">
-                    <select class="form-required country form-control" type="text" name="billing_country"
-                      placeholder="State" required>
-                      <option value="">Country</option>
-                      <option value="US">US</option>
-                      <option value="GB">UK</option>
-                    </select>
+                <div class="security-logo-2 col-md-6">
+                  <img class="col-md-12" src="img/security-logo-2.png">
+                </div>
+              </div>
+            -->
+          </div>
+
+          <div class="form-section form-center">
+            <h3>Billing Address</h3>
+            <div class="order-information-wrapper">
+              <div class="billing-address-information-wrapper">
+                <div class="billing-address-information">
+                  <div class="card-billing-address">
+                    <div class="address_line1 form-group">
+                      <div class="col-md-12 controls">
+                        <input class="form-required address_line1 form-control"
+                          type="text" name="billing_address_line1"
+                          placeholder="Street address, P.O. box, company name, c/o" required value="">
+                      </div>
+                    </div>
+                    <div class="address_line2 form-group">
+                      <div class="col-md-12 controls">
+                        <input class="address_line2 form-control"
+                          type="text" name="billing_address_line2"
+                          placeholder="Apartment, suite, unit, building, floor, etc." value="">
+                      </div>
+                    </div>
+                    <div class="city form-group">
+                      <div class="col-md-12 controls">
+                        <input class="form-required city form-control" type="text" name="billing_city"
+                        placeholder="City" value="" required>
+                      </div>
+                    </div>
+                    <div class="state zip_code form-group">
+                      <div class="col-md-4 controls">
+                        <input class="form-required city form-control" type="text" name="billing_state"
+                        placeholder="State" value="" required>
+                      </div>
+                      <div class="col-md-4 controls">
+                        <input class="form-required zip_code form-control" type="text" name="billing_zip_code"
+                        placeholder="Zip Code" value="" required>
+                      </div>
+                      <div class="col-md-4 controls">
+                        <select class="form-required country form-control" type="text" name="billing_country"
+                          placeholder="State" required>
+                          <option value="">Country</option>
+                          <option value="US">US</option>
+                          <option value="GB">UK</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="phone form-group">
+                      <div class="col-md-12 controls">
+                        <input class="form-required country form-control" inputmode="numeric" type="text" name="phone"
+                          placeholder="Phone Number" required>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <div class="form-section form-right">
-        <h3>Shipping Address</h3>
-        <div class="order-information-wrapper">
-          <div class="billing-address-information-wrapper">
-            <div class="billing-address-information">
-              <div class="card-billing-address form-group">
-                <div class="is-billing-address">
-                  <div class="col-md-12 controls">
-                    <label>
-                      <input type="checkbox"> Same as billing address
-                    </label>
-                  </div>
-                </div>
-                <div class="address_line1 form-group">
-                  <div class="col-md-12 controls">
-                    <input class="form-required address_line1 form-control"
-                      type="text" name="shipping_address_line1"
-                      placeholder="Street address, P.O. box, company name, c/o"
-                      required value="">
-                  </div>
-                </div>
-                <div class="address_line2 form-group">
-                  <div class="col-md-12 controls">
-                    <input class="address_line2 form-control"
-                      type="text" name="shipping_address_line2"
-                      placeholder="Apartment, suite, unit, building, floor, etc." value="">
-                  </div>
-                </div>
-                <div class="city form-group">
-                  <div class="col-md-12 controls">
-                    <input class="form-required city form-control" type="text" name="shipping_city"
-                    placeholder="City" value=""
-                    required>
-                  </div>
-                </div>
-                <div class="state zip_code form-group">
-                  <div class="col-md-4 controls">
-                    <input class="form-required city form-control" type="text" name="shipping_state"
-                    placeholder="State" value=""
-                    required>
-                  </div>
-                  <div class="col-md-4 controls">
-                    <input class="form-required zip_code form-control" type="text" name="shipping_zip_code"
-                    placeholder="Zip Code" value=""
-                    required>
-                  </div>
-                  <div class="col-md-4 controls">
-                    <select class="form-required country form-control" type="text" name="shipping_country"
-                      placeholder="State" required>
-                      <option value="">Country</option>
-                      <option value="US">US</option>
-                      <option value="GB">UK</option>
-                    </select>
+          <div class="form-section form-center">
+            <h3>Shipping Address</h3>
+            <div class="order-information-wrapper">
+              <div class="shipping-address-information-wrapper">
+                <div class="shipping-address-information">
+                  <div class="card-shipping-address form-group">
+                    <div class="is-shipping-address">
+                      <div class="col-md-12 controls">
+                        <label>
+                          <input id="same-as-billing" type="checkbox"> Same as billing address
+                        </label>
+                      </div>
+                    </div>
+                    <div class="address_line1 form-group">
+                      <div class="col-md-12 controls">
+                        <input class="form-required address_line1 form-control"
+                          type="text" name="shipping_address_line1"
+                          placeholder="Street address, P.O. box, company name, c/o"
+                          required value="">
+                      </div>
+                    </div>
+                    <div class="address_line2 form-group">
+                      <div class="col-md-12 controls">
+                        <input class="address_line2 form-control"
+                          type="text" name="shipping_address_line2"
+                          placeholder="Apartment, suite, unit, building, floor, etc." value="">
+                      </div>
+                    </div>
+                    <div class="city form-group">
+                      <div class="col-md-12 controls">
+                        <input class="form-required city form-control" type="text" name="shipping_city"
+                        placeholder="City" value=""
+                        required>
+                      </div>
+                    </div>
+                    <div class="state zip_code form-group">
+                      <div class="col-md-4 controls">
+                        <input class="form-required city form-control" type="text" name="shipping_state"
+                        placeholder="State" value=""
+                        required>
+                      </div>
+                      <div class="col-md-4 controls">
+                        <input class="form-required zip_code form-control" type="text" name="shipping_zip_code"
+                        placeholder="Zip Code" value=""
+                        required>
+                      </div>
+                      <div class="col-md-4 controls">
+                        <select class="form-required country form-control" type="text" name="shipping_country"
+                          placeholder="State" required>
+                          <option value="">Country</option>
+                          <option value="US">US</option>
+                          <option value="GB">UK</option>
+                        </select>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <div class="submit-wrapper">
-        <div id="status"></div>
-        <button id="submit">Save Settings</button>
+          <div class="submit-wrapper">
+            <div id="status" class="status center"></div>
+            <button id="submit" class='fake-button center'>Save Settings</button>
+          </div>
+        </form>
+
       </div>
-    </form>
+    </div>
 
   </body>
 </html>

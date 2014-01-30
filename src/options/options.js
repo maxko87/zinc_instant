@@ -1,3 +1,6 @@
+DOMAIN = "localhost:5000";
+// DOMAIN = "api.zinc.io";
+
 get_object_from_form = function(form_selector) {
   var inputs = $(form_selector + " :input");
   var values = {};
@@ -23,55 +26,163 @@ form_is_populated = function(form_selector) {
 
 safe_put = function(key, val){
   var plaintext = JSON.stringify(val);
-  var ciphertext = CryptoJS.AES.encrypt(plaintext, chrome.extension.getBackgroundPage().pw);
-  localStorage[key] = ciphertext;
+  var ciphertext_key = key//CryptoJS.AES.encrypt(key, chrome.extension.getBackgroundPage().pw).toString();
+  var ciphertext_value = CryptoJS.AES.encrypt(plaintext, chrome.extension.getBackgroundPage().pw).toString();
+  localStorage[ciphertext_key] = ciphertext_value;
 }
 
 safe_get = function(key){
-  var ciphertext = localStorage[key];
-  if (!ciphertext)
+  var ciphertext_key = key//CryptoJS.AES.encrypt(key, chrome.extension.getBackgroundPage().pw).toString();
+  var ciphertext_value = localStorage[ciphertext_key];
+  if (!ciphertext_value)
     return;
-  var plaintext = CryptoJS.AES.decrypt(ciphertext, chrome.extension.getBackgroundPage().pw);
-  return JSON.parse(plaintext.toString(CryptoJS.enc.Utf8));
+  var plaintext = CryptoJS.AES.decrypt(ciphertext_value, chrome.extension.getBackgroundPage().pw).toString(CryptoJS.enc.Utf8);
+  console.log(plaintext);
+  return JSON.parse(plaintext);
 }
 
-function save_options() {
-  var status = document.getElementById("status");
-  if (!form_is_populated("#billing-info-form")){
-    status.innerHTML = "Please enter all required fields.";
-    setTimeout(function() {
-      status.innerHTML = "";
-    }, 3000);
-    return 
-  }
-  safe_put("user_info", get_object_from_form("#billing-info-form"));
-  status.innerHTML = "Information saved!";
+set_status = function (status_text_id, text, timeout, is_error){
+  $status = $('#'+status_text_id);
+  $status.text(text);
+  if (is_error)
+    $status.css('color', 'red');
+  else
+    $status.css('color', 'green');
   setTimeout(function() {
-    status.innerHTML = "";
-  }, 2000);
+    $status.text("");
+  }, timeout);
+}
+
+generic_form_submitter = function(status_text_id, form_selector) {
+  var status = document.getElementById(status_text_id);
+  if (!form_is_populated(form_selector)){
+    set_status(status_text_id, "Please enter all required fields.", 3000, true);
+    return false;
+  }
+  return true;
+}
+
+save_login = function() {
+  if (generic_form_submitter("login-status", "#login-form")) {
+    $('.spinner').css('display', 'block');
+    email = $('#email').val();
+    password = $('#password').val();
+    safe_put('email', email);
+    data = {'email': email, 'password': password};
+    $.post("http://" + DOMAIN + "/v0/instant_update_user", JSON.stringify(data))
+      .done(function (data){
+        console.log(data);
+        if (data['_type'] == 'error'){
+          $('.spinner').css('display', 'none');
+          console.log(data['message']);
+          set_status("login-status", data['message'], 5000, true);
+        }
+        else {
+          $('#login-form').css('display', 'none');
+          $('.spinner').css('display', 'none');
+          $('#main-form').css('display', 'block');
+          restore_options(data['payload']);
+        }
+    });
+  }
+}
+
+save_options = function() {
+  if (generic_form_submitter("status", "#main-form")){
+    $('.spinner').css('display', 'block');
+    payload = get_object_from_form("#main-form");
+    data = {'email': email, 'password': password, 'payload': payload} // TODO: email and password are global from before
+    $.post("http://" + DOMAIN + "/v0/instant_update_user", JSON.stringify(data))
+      .done(function (data){
+        $('.spinner').css('display', 'none');
+        if (data['_type'] == 'error'){
+          set_status("status", data['message'], 5000, true);
+        }
+        else {
+          set_status("status", "Information successfully saved!", 3000, false);
+        }
+    });
+  }
 }
 
 
-function restore_options() {
-  var user_info = safe_get("user_info");
-  if (!user_info) {
-    return;
-  }
+restore_options = function(payload) {
   // key is the form input id, val
-  for (var key in user_info){
-    // if value = number
-    var value = user_info[key];
-    $('input[name="' + key + '"]').val(value);
+  for (var key in payload){
+    var selector = 'input[name="' + key + '"]';
+    if ($(selector).length == 0){
+      selector = 'select[name="' + key + '"]';
+    }
+    var value = payload[key];
+    $(selector).val(value);
   } 
 }
 
-document.addEventListener("DOMContentLoaded", restore_options);
+// document.addEventListener("DOMContentLoaded", restore_options);
 
 $(function() {
+
+  $('.fake-button').click(function(event){
+    event.preventDefault();
+  });
+
+  $('#same-as-billing').click(function(event){
+    var is_checked = $(this).is(':checked');
+    console.log(is_checked);
+    $('.billing-address-information input').each(function(index, input){
+      new_name = input.name.replace('billing', 'shipping');
+      if (is_checked){
+        new_value = $(input).val();
+      }
+      else{
+        new_value = "";   
+      }
+      $('input[name="' + new_name +'"]').val(new_value);
+    });
+    if (is_checked){
+      $('select[name="shipping_country"]').val($('select[name="billing_country"]').val());
+    }
+    else {
+      $('select[name="shipping_country"]').val('');
+    }
+  });
+
+  // check if user has email saved to local storage (logged in)
+  var email = safe_get('email');
+  if (email){
+    $('.login_or_register').text("log in");
+    $('#email').val(email);
+  }
+  else {
+    $('.login_or_register').text("register");
+  }
+
+
+
+  document.querySelector('#login-submit').addEventListener('click', save_login);
   document.querySelector('#submit').addEventListener('click', save_options);
-  // var a = "hello";
-  // var ciphertext = CryptoJS.AES.encrypt(a, "hi");
-  // console.log(ciphertext.toString());
-  // var plaintext = CryptoJS.AES.decrypt(ciphertext, "hi");
-  // console.log(plaintext.toString(CryptoJS.enc.Utf8));
+
+  var creditly = Creditly.initialize(
+    '.creditly-wrapper .expiration_month_and_year',
+    '.creditly-wrapper .credit_card_number',
+    '.creditly-wrapper .security_code',
+    '.creditly-wrapper .card_type');
+
+    // $(".creditly-card-form .submit").click(function(e) {
+    //   e.preventDefault();
+    //   var output = creditly.validate();
+    //   if (output) {
+    //     // Your validated credit card output
+    //     console.log(output);
+    //   }
+    // });
+
 });
+
+
+
+
+
+
+
+

@@ -1,20 +1,26 @@
 <!doctype html>
 <style type='text/css'>
-  #popup {
-    padding: 10px;
-    height: 100px;
-    width: 400px;
-    font-family: Helvetica, Ubuntu, Arial, sans-serif;
+  body {
+    padding: 20px;
+    width: 290px;
+    /*font-family: Helvetica, Ubuntu, Arial, sans-serif;*/
     font-size: 20px;
     text-align: center;
+    background: #E9E9E9;
   }
   #buy {
     margin-left: auto;
     margin-right: auto;
-    width: 80px;
+    /*width: 80px;*/
+  }
+  #buy-form {
+    margin: 0;
   }
   #message {
     font-size: 16px;
+  }
+  #password {
+    margin-top: 20px;
   }
   #error {
     color: red;
@@ -22,17 +28,39 @@
   #success {
     color: green;
   }
-  #buy{}
+  input {
+    text-align: center;
+    box-shadow: none;
+    border: none;
+    height: 18px;
+  }
 
 </style>
 
+<link rel="stylesheet" href="../options/options.css">
 <script type='text/javascript' src='../../js/jquery/jquery.min.js'></script>
 <script type='text/javascript' src='../../js/aes.js'></script>
+<script type='text/javascript' src='../../js/sha3.js'></script>
 <script type='text/javascript' src='browser_action.js'></script>
 
 <div id='popup'>
-  <div id='confirmation'></div>
-  <div id='error'></div>
-  <div id='success'></div>
-  <button id='buy'>Confirm</button>
+
+  <form id="buy-form" class="form-horizontal" method="post" novalidate>
+    <div class="form-center">
+      <div id='confirmation'></div>
+      <div class="form-group">
+        <div class="col-md-12 controls">
+          <input class="form-required form-control" id="password" type="password" name="password" placeholder="Password" required>
+        </div>
+      </div>
+      <div id='error' class="status"></div>
+      <div id='success' class="status"></div>
+      <div class="row submit-wrapper">
+        <div class="col-md-6 col-md-offset-4">
+          <button id="buy">Confirm Purchase</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
 </div>

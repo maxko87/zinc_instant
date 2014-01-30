@@ -1,9 +1,83 @@
+#main-form {
+  display: none;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+.creditly-wrapper .card_type {
+  float: right;
+  font-style: italic;
+  font-weight: normal !important;
+}
+
 /*
  * Bootstrap stuff
  */
 
+/*
+.creditly-wrapper {
+  background-color: rgba(66, 139, 202, 0.8);
+  border-color: #357ebd;
+  border-radius: 4px;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+
+  width: 350px;
+  min-height: 216px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: white;
+
+  background-image: -webkit-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);
+  background-image: -moz-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);
+  background-image: -ms-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);
+  background-image: -o-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);
+  background-image: -webkit-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);
+  background-image: -moz-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);
+  background-image: -ms-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);
+  background-image: -o-linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);
+  background-image: linear-gradient(#7dc5ee,#008cdd 85%,#30a2e4);
+}
+
+.creditly-wrapper .credit-card-wrapper {
+  padding: 40px 30px;
+}
+
+.creditly-wrapper .credit-card-wrapper .controls {
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+.creditly-wrapper input.has-error {
+  outline: none;
+  border-color: #ff7076;
+  border-top-color: #ff5c61;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.2),0 1px 0 rgba(255,255,255,0),0 0 4px 0 rgba(255,0,0,0.5);
+  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.2),0 1px 0 rgba(255,255,255,0),0 0 4px 0 rgba(255,0,0,0.5);
+  -ms-box-shadow: inset 0 1px 2px rgba(0,0,0,0.2),0 1px 0 rgba(255,255,255,0),0 0 4px 0 rgba(255,0,0,0.5);
+  -o-box-shadow: inset 0 1px 2px rgba(0,0,0,0.2),0 1px 0 rgba(255,255,255,0),0 0 4px 0 rgba(255,0,0,0.5);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.2),0 1px 0 rgba(255,255,255,0),0 0 4px 0 rgba(255,0,0,0.5);
+}
+
+/*
 .creditly-wrapper .form-control {
-  display: inline;
+  display: block;
   width: 100%;
   height: 34px;
   padding: 6px 12px;
@@ -14,6 +88,7 @@
   background-color: #fff;
   background-image: none;
   border: 1px solid #ccc;
+  border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
   box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
   -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
@@ -81,10 +156,6 @@
   float: right;
 }
 
-/**
- * Button CSS
- */
-
 .creditly-card-form .submit {
   overflow: hidden;
   display: inline-block;
@@ -102,6 +173,11 @@
   border: 0;
   padding: 1px;
   text-decoration: none;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
   -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.2);
   -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.2);
   -ms-box-shadow: 0 1px 0 rgba(0,0,0,0.2);
@@ -143,9 +219,43 @@
   -ms-box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);
   -o-box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.25);
-}
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+}*/
 
-/***** @angelali **************************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***** @angelali <3 **************************************************************/
 
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900);
 
@@ -189,6 +299,7 @@ header h2 {
 
 .instructions {
   font-size: 18px;
+  line-height: 28px;
   font-weight: 400;
   max-width: 960px;
   margin: 40px auto;
@@ -198,13 +309,22 @@ header h2 {
 .instructions .shopping-cart {
   color: #FF6600;
   float: left;
-  font-size: 72px;
-  padding-right: 20px;
+  font-size: 26px;
+  padding-right: 30px;
   text-shadow: 0px 6px 0px rgba(0, 0, 0, 0.1);
 }
 
 .instructions p {
   margin: 0;
+}
+
+.instructions h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.instructions .icon {
+  height: 1em;
 }
 
 /* Form base */
@@ -273,6 +393,11 @@ form input {
   float: right;
 }
 
+.form-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .order-information-wrapper {
   margin-top: 20px;
 }
@@ -324,4 +449,73 @@ form input {
 
 .submit-wrapper button:focus {
   outline: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* LOADING */
+
+.spinner {
+  margin: 100px auto 50px;
+  width: 70px;
+  text-align: center;
+  display: none;
+}
+
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: #333;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+  animation: bouncedelay 1.4s infinite ease-in-out;
+  /* Prevent first frame from flickering when animation starts */
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0.0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes bouncedelay {
+  0%, 80%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 40% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
 }
