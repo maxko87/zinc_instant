@@ -3,8 +3,6 @@ DOMAIN = "https://api.zinc.io";
 
 $(document).ready(function(){
 
-  console.log('browser_action.js');
-
   // TODO: refactor
   safe_get = function(key){
     var ciphertext_key = key//CryptoJS.AES.encrypt(key, chrome.extension.getBackgroundPage().pw).toString();
@@ -56,7 +54,6 @@ $(document).ready(function(){
           return;
         }
         data = {'email': email, 'password': password, "image": image, "product_data": product_data, "url": tab.url};
-        console.log(JSON.stringify(data));
         $('.spinner').css('display', 'block');
         $('#buy').css('display', 'none');
         $('#password').css('display', 'none');
@@ -67,8 +64,6 @@ $(document).ready(function(){
               show_error(data['message']);
             }
             else{
-              console.log("placed");
-              console.log(data);
               show_success('Order placed successfully! You will receive a confirmation email shortly.');
             }
           });

@@ -30,11 +30,9 @@ update_tab_map = function(tab){
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.confirmation){
-    console.log('setting tab ' + sender.tab.id + " to " + request.confirmation);
     tab_content_map[sender.tab.id] = {'title': request.confirmation.title, 'price': request.confirmation.price};
   }
   else if (request.disable_tab){
-    console.log('disabling popup for tab ' + sender.tab.id);
     delete tab_content_map[sender.tab.id];
   }
   update_tab_map(sender.tab);

@@ -37,7 +37,6 @@ safe_get = function(key){
   if (!ciphertext_value)
     return;
   var plaintext = CryptoJS.AES.decrypt(ciphertext_value, chrome.extension.getBackgroundPage().pw).toString(CryptoJS.enc.Utf8);
-  console.log(plaintext);
   return JSON.parse(plaintext);
 }
 
@@ -71,10 +70,8 @@ save_login = function() {
     data = {'email': email, 'password': password};
     $.post(DOMAIN + "/v0/instant_update_user", JSON.stringify(data))
       .done(function (data){
-        console.log(data);
         if (data['_type'] == 'error'){
           $('.spinner').css('display', 'none');
-          console.log(data['message']);
           set_status("login-status", data['message'], 5000, true);
         }
         else {
@@ -90,7 +87,6 @@ save_login = function() {
 save_options = function() {
   output = creditly.validate();
   if (!output){
-    console.log('not output');
     set_status("status", "Invalid credit card information.", 3000, true);
   }
   if (output && generic_form_submitter("status", "#main-form")){
@@ -131,7 +127,6 @@ $(function() {
 
   $('#same-as-billing').click(function(event){
     var is_checked = $(this).is(':checked');
-    console.log(is_checked);
     $('.billing-address-information input').each(function(index, input){
       if (input.name.indexOf('billing') > -1) {
         new_name = input.name.replace('billing', 'shipping');
@@ -172,15 +167,6 @@ $(function() {
     '.credit_card_number',
     '.security_code',
     '.card_type');
-
-    // $(".creditly-card-form .submit").click(function(e) {
-    //   e.preventDefault();
-    //   var output = creditly.validate();
-    //   if (output) {
-    //     // Your validated credit card output
-    //     console.log(output);
-    //   }
-    // });
 
 });
 
