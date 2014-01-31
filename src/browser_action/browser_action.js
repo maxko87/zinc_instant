@@ -57,8 +57,12 @@ $(document).ready(function(){
         }
         data = {'email': email, 'password': password, "image": image, "product_data": product_data, "url": tab.url};
         console.log(JSON.stringify(data));
+        $('.spinner').css('display', 'block');
+        $('#buy').css('display', 'none');
+        $('#password').css('display', 'none');
         $.post(DOMAIN + "/v0/instant_buy", JSON.stringify(data))
           .done(function (data){
+            $('.spinner').css('display', 'none');
             if (data['_type'] == 'error'){
               show_error(data['message']);
             }

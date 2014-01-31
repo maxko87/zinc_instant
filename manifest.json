@@ -22,7 +22,8 @@
   },
   "permissions": [
     "tabs",
-    "http://*/*"
+    "http://*/*",
+    "https://*/*"
     // "http://amazon.com/*",
     // "https://amazon.com/*",
     // "http://ebay.com/*",
@@ -220,7 +221,8 @@
   "content_scripts": [
     {
       "matches": [
-        "http://*/*"
+        "http://*/*",
+        "https://*/*"
       ],
       "js": [
         "src/inject/inject.js"

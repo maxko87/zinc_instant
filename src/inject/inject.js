@@ -27,6 +27,7 @@ var message = "";
 if (title && price){
   message = "Purchase " + title + " for " + price + " + shipping?";
   chrome.runtime.sendMessage({confirmation: message});
+  console.log('product page');
 }
 // else if (title){
 //   message = "Purchase " + title + "?";
@@ -35,6 +36,7 @@ if (title && price){
 else {
   // message = "Purchase this item?";
   chrome.runtime.sendMessage({disable_tab: true});
+  console.log('non product page');
 }
 
 

@@ -4,6 +4,10 @@ var pw = "0123890128365209132"; // fuckit.js
 //   return "<html>" + $('<div>').append(jquery).html() + "</html>";
 // }
 
+chrome.runtime.onInstalled.addListener(function (){
+  chrome.tabs.create({url: "src/options/options.html"});
+});
+
 var tab_content_map = {}
 
 update_tab_map = function(tab){

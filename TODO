@@ -14,6 +14,19 @@ DONE - instructions
 DONE - better "information saved! font"
 
 
+DONE -Upon install, automatically open options page
+DONE -It should pop out and say "Sorry, no product was detected on this page" or similiar on pages that dont have products when clicked.
+DONE -credit card validation
+
+-loading indicator when placed order
+
+-email to user on order place clicked
+
+- check not many titles/prices
+
+-login/register text for register
+
+
 future:
 - standalone instruction website
 

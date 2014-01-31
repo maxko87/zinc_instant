@@ -88,7 +88,12 @@ save_login = function() {
 }
 
 save_options = function() {
-  if (generic_form_submitter("status", "#main-form")){
+  output = creditly.validate();
+  if (!output){
+    console.log('not output');
+    set_status("status", "Invalid credit card information.", 3000, true);
+  }
+  if (output && generic_form_submitter("status", "#main-form")){
     $('.spinner').css('display', 'block');
     payload = get_object_from_form("#main-form");
     data = {'email': email, 'password': password, 'payload': payload} // TODO: email and password are global from before
@@ -162,11 +167,11 @@ $(function() {
   document.querySelector('#login-submit').addEventListener('click', save_login);
   document.querySelector('#submit').addEventListener('click', save_options);
 
-  var creditly = Creditly.initialize(
-    '.creditly-wrapper .expiration_month_and_year',
-    '.creditly-wrapper .credit_card_number',
-    '.creditly-wrapper .security_code',
-    '.creditly-wrapper .card_type');
+  creditly = Creditly.initialize(
+    '.expiration_month_and_year',
+    '.credit_card_number',
+    '.security_code',
+    '.card_type');
 
     // $(".creditly-card-form .submit").click(function(e) {
     //   e.preventDefault();
