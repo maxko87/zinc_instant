@@ -94,12 +94,10 @@ save_options = function() {
     set_status("status", "Invalid credit card information.", 3000, true);
   }
   if (output && generic_form_submitter("status", "#main-form")){
-    $('.spinner').css('display', 'block');
     payload = get_object_from_form("#main-form");
     data = {'email': email, 'password': password, 'payload': payload} // TODO: email and password are global from before
     $.post(DOMAIN + "/v0/instant_update_user", JSON.stringify(data))
       .done(function (data){
-        $('.spinner').css('display', 'none');
         if (data['_type'] == 'error'){
           set_status("status", data['message'], 5000, true);
         }
@@ -135,14 +133,16 @@ $(function() {
     var is_checked = $(this).is(':checked');
     console.log(is_checked);
     $('.billing-address-information input').each(function(index, input){
-      new_name = input.name.replace('billing', 'shipping');
-      if (is_checked){
-        new_value = $(input).val();
+      if (input.name.indexOf('billing') > -1) {
+        new_name = input.name.replace('billing', 'shipping');
+        if (is_checked){
+          new_value = $(input).val();
+        }
+        else{
+          new_value = "";   
+        }
+        $('input[name="' + new_name +'"]').val(new_value);
       }
-      else{
-        new_value = "";   
-      }
-      $('input[name="' + new_name +'"]').val(new_value);
     });
     if (is_checked){
       $('select[name="shipping_country"]').val($('select[name="billing_country"]').val());
@@ -159,7 +159,7 @@ $(function() {
     $('#email').val(email);
   }
   else {
-    $('.login_or_register').text("register");
+    $('.login_or_register').text("register or log in");
   }
 
 

@@ -24,41 +24,18 @@
 
     <section class="instructions">
       <div class="shopping-cart"><i class="fa fa-shopping-cart"></i></div>
-      <h3>Zinc Instant allows you to buy anything from any online retailer in seconds.</h3>
+      <h3>Zinc Instant allows you to buy anything from any online retailer in seconds. <a href="faq.html">Learn more.</a></h3>
+<!--       <div class="steps">
+        <div class="step" id="step1">1) Sign up</div> 
+        <div class="step" id="step2">2) Enter billing and shipping information</div> 
+        <div class="step" id="step3">3) Start ordering!</div>
+      </div>  -->
     </section>
 
     <div class="row">
-      <div class="col-md-4 col-md-offset-1">
-
-        <section class="instructions">
-        <h3>Signing Up</h3>
-          <ol>
-            <li>Go to the Options page of the extension.</li>
-            <li>Create an account with Zinc Instant. Order confirmations will come to this email, and you will use this password to confirm purchases.</li>
-            <li>Enter your billing and shipping information. We store this in our secure, PCI compliant infrastructure.</li>
-          </ol>
-          <h3>Placing Orders</h3>
-          <ol>
-            <li>When you are on a page with an item you can purchase, the extension icon will turn from <img class="icon" src="../../icons/instant_disabled.png"> into <img class="icon" src="../../icons/instant_enabled.png">. This means Zinc Instant is active on that page!</li>
-            <li>Select the quantity of the item you want, as well as the size, color, and other dimensions. 
-            <li>Click on the icon to bring up a confirmation popup. If you are ready to place the order, enter your password and click "Confirm Purchase".</li>
-            <li>You'll receive a confirmation email within the next hour. It's now that easy to place an order online.</li>
-          </ol>
-        </section>
-
-      </div>
-
-      <div class="col-md-7">
-
-        <div class="spinner">
-          <div class="bounce1"></div>
-          <div class="bounce2"></div>
-          <div class="bounce3"></div>
-        </div>
-
+      <div class="col-md-12">
         <form id="login-form" class="form-horizontal" method="post" novalidate>
           <div class="form-section form-center">
-
             <h3 class="login_or_register">Log in</h3>
               <div class="form-group">
                 <div class="col-md-12 controls">
@@ -78,11 +55,15 @@
             </div>
           </div>
         </form>
+      </div>
+    </div>
 
 
 
-        <form id="main-form" class="form-horizontal" method="post" novalidate>
-          <div class="form-section form-center">
+    <div class="row">
+      <form id="main-form" class="form-horizontal" method="post" novalidate>
+        <div class="col-md-4">
+          <div class="form-section form-left">
             <h3>Credit Card</h3>
             <section class="credit-card">
               <div class="credit-card-wrapper creditly-wrapper">
@@ -130,8 +111,11 @@
               </div>
             -->
           </div>
+        </div>
 
-<!--           <div class="form-section form-center">
+
+        <div class="col-md-4">
+          <div class="form-section form-left">
             <h3>Billing Address</h3>
             <div class="order-information-wrapper">
               <div class="billing-address-information-wrapper">
@@ -178,7 +162,7 @@
                     <div class="phone form-group">
                       <div class="col-md-12 controls">
                         <input class="country form-control" inputmode="numeric" type="text" name="phone"
-                        placeholder="Phone Number (optional)" required>
+                        placeholder="Phone Number (optional)">
                       </div>
                     </div>
                   </div>
@@ -186,8 +170,11 @@
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="form-section form-center">
+
+        <div class="col-md-4">
+          <div class="form-section form-left">
             <h3>Shipping Address</h3>
             <div class="order-information-wrapper">
               <div class="shipping-address-information-wrapper">
@@ -195,8 +182,8 @@
                   <div class="card-shipping-address form-group">
                     <div class="is-shipping-address">
                       <div class="col-md-12 controls">
-                        <label>
-                          <input id="same-as-billing" type="checkbox"> Same as billing address
+                        <label class="same-as-billing">
+                          <input id="same-as-billing" class="same-as-billing" type="checkbox"> Same as billing address
                         </label>
                       </div>
                     </div>
@@ -246,7 +233,14 @@
                 </div>
               </div>
             </div>
-          </div> -->
+          </div>
+        </div>
+
+          <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+          </div>
 
           <div class="submit-wrapper">
             <div id="status" class="status center"></div>

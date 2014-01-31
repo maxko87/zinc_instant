@@ -77,13 +77,14 @@ $(document).ready(function(){
   });
 
   $('#register').click(function(event) {
-    console.log('hi');
     chrome.tabs.create({url: '/src/options/options.html'});
   });
 
   process_current_tab(function(tab){
     var tab_content_map = chrome.extension.getBackgroundPage().tab_content_map;
-    var text = tab_content_map[tab.id];
+    title = tab_content_map[tab.id].title;
+    price = tab_content_map[tab.id].price;
+    text = "Purchase " + title + " for " + price + " + shipping?";
     $('#confirmation').text(text);
   });
 

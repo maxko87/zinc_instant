@@ -12,19 +12,14 @@ DONE - updated creditly
 DONE - brighter enabled icon
 DONE - instructions
 DONE - better "information saved! font"
-
-
 DONE -Upon install, automatically open options page
 DONE -It should pop out and say "Sorry, no product was detected on this page" or similiar on pages that dont have products when clicked.
 DONE -credit card validation
+DONE -loading indicator when placed order
+DONE - check not many titles/prices
+DONE - login/register text for register
 
--loading indicator when placed order
-
--email to user on order place clicked
-
-- check not many titles/prices
-
--login/register text for register
+- email to user on order place clicked
 
 
 future:
