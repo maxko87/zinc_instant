@@ -36,6 +36,12 @@ $(document).ready(function(){
     });
   }
 
+  if (!safe_get('email')) {
+    $('#buy-form').hide();
+    $('#registration').show();
+  };
+
+
   $('#buy').click(function(event){
     event.preventDefault();
     // MAKE API CALL
@@ -64,6 +70,11 @@ $(document).ready(function(){
           });
       });
     });
+  });
+
+  $('#register').click(function(event) {
+    console.log('hi');
+    chrome.tabs.create({url: '/src/options/options.html'});
   });
 
   process_current_tab(function(tab){
