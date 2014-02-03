@@ -1,8 +1,8 @@
 {
   "name": "Zinc Instant",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "manifest_version": 2,
-  "description": "Buy anything from any online store with one click.",
+  "description": "Buy anything from any online store with two clicks.",
   "homepage_url": "http://zinc.io",
   "icons": {
     "128": "icons/instant_enabled.png"
