@@ -1,30 +1,23 @@
-DONE - screenshot current page
-DONE - email us on submission
-DONE - cool regex to pull item name and price across most stores
-DONE - change icon appearance on pages that allow one click buy!
-DONE - USE REAL SECURITY
-DONE - password protect order
-DONE - make things look good (angela)
-DONE - country autofill
-DONE - phone number
-DONE - fix order placing
-DONE - updated creditly
-DONE - brighter enabled icon
-DONE - instructions
-DONE - better "information saved! font"
-DONE -Upon install, automatically open options page
-DONE -It should pop out and say "Sorry, no product was detected on this page" or similiar on pages that dont have products when clicked.
-DONE -credit card validation
-DONE -loading indicator when placed order
-DONE - check not many titles/prices
-DONE - login/register text for register
-DONE - email to user on order place clicked
+DONE - reinject on dom change
+- grab variant choices automatically
+- be clearer about the fact that we save the user money in the documentation.
+- find approximate shipping costs + taxes for each retailer, and take into cost accounts
+- move non-essential logic into another file, or into API call
 
 
-future:
-- standalone instruction website
+THINGS WE NEED TO GRAB PER RETAILER FOR ULTIMATE VISION:
+  REQUIRED:
+    -tax price. estimate as 5%. 
+    -shipping price. learn retailer rules for different price ranges. 
+    -
+  COOL:
+    -gift receipt
+  SHIT THAT WOULD BE NICE BUT HOW???
+    -gift wrapping, gift message
 
-to think about:
-- programmatic injection into all pages that have "buy"-esque button
-- trigger changes to popup on any ajax request?
 
+
+FUTURE:
+-make it possible to add to zinc cart
+  -each popup is the same, but with "add to cart" and "view cart"
+  -"view cart" page on options, compiling savings, along with button to check out

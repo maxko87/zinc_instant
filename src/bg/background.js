@@ -1,12 +1,8 @@
 var pw = "0123890128365209132"; // fuckit.js
 
-// get_html_from_jquery = function(jquery){
-//   return "<html>" + $('<div>').append(jquery).html() + "</html>";
-// }
-
-chrome.runtime.onInstalled.addListener(function (){
-  chrome.tabs.create({url: "src/options/options.html"});
-});
+// chrome.runtime.onInstalled.addListener(function (){
+//   chrome.tabs.create({url: "src/options/options.html"});
+// });
 
 var tab_content_map = {}
 
@@ -29,12 +25,19 @@ update_tab_map = function(tab){
 
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  if (request.confirmation){
-    tab_content_map[sender.tab.id] = {'title': request.confirmation.title, 'price': request.confirmation.price};
+  if (request._type == 'set_popup_contents'){
+    console.log('updated tab map: ');
+    console.log(request);
+    tab_content_map[sender.tab.id] = request;
   }
   else if (request.disable_tab){
     delete tab_content_map[sender.tab.id];
   }
+  // else if (request._type == 'reinject'){
+  //   console.log('reinject');
+  //   tab_id = sender.tab.id;
+  //   chrome.tabs.executeScript(tab_id, {file: "src/inject/inject.js"});
+  // }
   update_tab_map(sender.tab);
 });
 

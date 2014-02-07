@@ -39,6 +39,9 @@
   .spinner {
     display: none;
   }
+  .hidden {
+    display: none;
+  }
 
 </style>
 
@@ -52,22 +55,32 @@
 
   <form id="buy-form" class="form-horizontal" method="post" novalidate>
     <div class="form-center">
-      <div id='confirmation'></div>
-      <div class="form-group">
-        <div class="col-md-12 controls">
-          <input class="form-required form-control" id="password" type="password" name="password" placeholder="Password" required>
+      <span id="title"></span>
+      <div id='shipping_methods'></div>
+      <div class="hidden">
+        <div id='confirmation'>
+          <div id="description">
+            <span id='retailer'></span> total: <strong><span id='their_total'></span></strong> (<span id='their_price'></span> subtotal + <span id='their_shipping'></span> shipping + <span id='their_tax'></span> tax).
+            <br>
+            Buy with Zinc for <strong><span id="our_total"></span></strong> and save <strong><span id="savings"></span></strong>.
+          </div>
         </div>
-      </div>
-      <div id='error' class="status"></div>
-      <div id='success' class="status"></div>
-      <div class="spinner">
-        <div class="bounce1"></div>
-        <div class="bounce2"></div>
-        <div class="bounce3"></div>
-      </div>
-      <div class="row submit-wrapper">
-        <div class="col-md-6 col-md-offset-4">
-          <button id="buy">Confirm Purchase</button>
+        <div class="form-group">
+          <div class="col-md-12 controls">
+            <input class="form-required form-control" id="password" type="password" name="password" placeholder="Password" required>
+          </div>
+        </div>
+        <div id='error' class="status"></div>
+        <div id='success' class="status"></div>
+        <div class="spinner">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
+        <div class="row submit-wrapper">
+          <div class="col-md-6 col-md-offset-4">
+            <button id="buy">Confirm Purchase</button>
+          </div>
         </div>
       </div>
     </div>
