@@ -1,93 +1,205 @@
+
 <!doctype html>
 <style type='text/css'>
   body {
-    padding: 20px;
-    width: 290px;
-    font-size: 20px;
-    text-align: center;
     background: #E9E9E9;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    font-size: 20px;
+    padding: 10px;
+    width: 300px;
   }
-  button {
-    margin-left: auto;
-    margin-right: auto;
-  }
+
   #buy-form {
     margin: 0;
+    padding: 0;
   }
+
   #message {
     font-size: 16px;
-  }
-  #password {
-    margin-top: 20px;
-    height: 30px;
-    width:250px;
-    font-size:20px;
   }
 
   #error {
     color: red;
   }
+
   #success {
     color: green;
   }
+
   input {
     text-align: center;
     box-shadow: none;
     border: none;
     height: 18px;
   }
+
   .spinner {
     display: none;
   }
+
   .hidden {
     display: none;
   }
 
+  /* @angelali */
+
+  body {
+    font-family: "Source Sans Pro";
+  }
+
+  #title {
+    background: #61D2D6;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px;
+    text-align: center;
+  }
+
+  #shipping_methods {
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .hidden {
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .description {
+    overflow: hidden;
+  }
+
+  .total {
+    float: left;
+    width: 100px;
+  }
+
+  .total h2 {
+    margin: 0;
+  }
+
+  .our.total {
+    float: left;
+    text-align: left;
+  }
+
+  .our.total h2 {
+    color: #61D2D6;
+  }
+
+  .their.total {
+    float: right;
+    text-align: right;
+  }
+
+  #their_total {
+    text-decoration: line-through;
+  }
+
+  .savings {
+    clear: both;
+    font-weight: 200;
+    padding: 20px 0 4px;
+  }
+
+  #password {
+    background: #FFF;
+    border: 1px dashed #333;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    color: #333;
+    font-size: 12px;
+    margin-top: 20px;
+    padding: 16px;
+    width: 100%;
+  }
+
+  #password:focus {
+    border: 1px dashed #333;
+    box-shadow: none;
+    outline: 0;
+  }
+
+  #password::-webkit-input-placeholder,
+  #password:-moz-placeholder,
+  #password::-moz-placeholder,
+  #password:-ms-input-placeholder {
+   color: #333;
+  }
+
+  #buy {
+    background: #333;
+    border: 0;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    color: #FEFEFE;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+    margin: 10px 0 0;
+    outline: 0;
+    padding: 10px;
+    text-transform: uppercase;
+    width: 100%;
+  }
+
+  #buy:hover {
+    background: #555;
+  }
+
 </style>
 
-<link rel="stylesheet" href="../options/options.css">
+<!-- <link rel="stylesheet" href="../options/options.css"> -->
 <script type='text/javascript' src='../../js/jquery/jquery.min.js'></script>
 <script type='text/javascript' src='../../js/aes.js'></script>
 <script type='text/javascript' src='../../js/sha3.js'></script>
 <script type='text/javascript' src='browser_action.js'></script>
 
-<div id='popup'>
+<div id="popup">
 
   <form id="buy-form" class="form-horizontal" method="post" novalidate>
     <div class="form-center">
-      <span id="title"></span>
-      <div id='shipping_methods'></div>
+      <div id="title"></div>
+      <div id="shipping_methods"></div>
       <div class="hidden">
-        <div id='confirmation'>
+        <div id="confirmation">
           <div id="description">
-            <span id='retailer'></span> total: <strong><span id='their_total'></span></strong> (<span id='their_price'></span> subtotal + <span id='their_shipping'></span> shipping + <span id='their_tax'></span> tax).
-            <br>
-            Buy with Zinc for <strong><span id="our_total"></span></strong> and save <strong><span id="savings"></span></strong>.
+
+            <div class="our total">
+              <h2>Zinc</h2>
+              <span id="our_total"></span>
+            </div>
+            <div class="their total">
+              <h2><span id="retailer"></span></h2>
+              <span id="their_total"></span>
+            </div>
+
+            <div class="savings">You save <span id="savings"></span>!</div>
+
+            <!-- <span id='their_price'></span> subtotal + <span id='their_shipping'></span> shipping + <span id='their_tax'></span> tax) -->
+
           </div>
         </div>
         <div class="form-group">
-          <div class="col-md-12 controls">
             <input class="form-required form-control" id="password" type="password" name="password" placeholder="Password" required>
-          </div>
         </div>
-        <div id='error' class="status"></div>
-        <div id='success' class="status"></div>
+        <div id="error" class="status"></div>
+        <div id="success" class="status"></div>
         <div class="spinner">
           <div class="bounce1"></div>
           <div class="bounce2"></div>
           <div class="bounce3"></div>
         </div>
-        <div class="row submit-wrapper">
-          <div class="col-md-6 col-md-offset-4">
-            <button id="buy">Confirm Purchase</button>
-          </div>
-        </div>
+
+        <button id="buy">Confirm Purchase</button>
+
       </div>
     </div>
   </form>
 
-<div class="submit-wrapper" id="registration" style='display:none'>
-  <button id="register">Join the Party</button>
-</div>
+  <div class="submit-wrapper" id="registration" style='display:none'>
+    <button id="register">Join the Party</button>
+  </div>
 
 </div>

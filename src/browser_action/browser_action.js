@@ -94,6 +94,7 @@ $(document).ready(function(){
     their_shipping_methods = tab_content_map[tab.id].shipping_methods;
 
     //dropdown to select shipping method
+    $('#title').text(title);
     select_html = '<select id="retailer_shipping_methods"><option value="-1">Select a shipping method</option>';
     for (var shipping_method in their_shipping_methods){
       var shipping_price = their_shipping_methods[shipping_method];
@@ -139,7 +140,7 @@ $(document).ready(function(){
       //show it all
       $('.hidden').css('display', 'block');
     });
-  
+
 
     //set all values
 
