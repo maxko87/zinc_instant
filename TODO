@@ -1,8 +1,15 @@
+
+DONE - fix NAN shipping bug
+DONE - display shipping address and billing info summary before purchase btn
 DONE - reinject on dom change
-- grab variant choices automatically
-- be clearer about the fact that we save the user money in the documentation.
-- find approximate shipping costs + taxes for each retailer, and take into cost accounts
-- move non-essential logic into another file, or into API call
+DONE - find approximate shipping costs + taxes for the retailer, and take into cost accounts
+DONE - grab variant choices automatically
+later - be clearer about the fact that we save the user money in the documentation.
+later - even if user doesn't have billing/shipping set up, give a warning and still show at least some info
+later - move non-essential logic into another file, or into API call
+- add a fuckton of retailers
+
+
 
 
 THINGS WE NEED TO GRAB PER RETAILER FOR ULTIMATE VISION:

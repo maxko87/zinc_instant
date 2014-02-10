@@ -38,7 +38,7 @@
     display: none;
   }
 
-  .hidden {
+  .hide2 {
     display: none;
   }
 
@@ -48,8 +48,8 @@
     font-family: "Source Sans Pro";
   }
 
-  #title {
-    background: #61D2D6;
+  .item-container {
+    background: #178EB3;
     color: #fff;
     font-size: 18px;
     padding: 10px;
@@ -59,6 +59,7 @@
   #shipping_methods {
     margin: 10px 0;
     text-align: center;
+    width: ;
   }
 
   .hidden {
@@ -85,12 +86,16 @@
   }
 
   .our.total h2 {
-    color: #61D2D6;
+    color: #178EB3;
   }
 
   .their.total {
     float: right;
     text-align: right;
+  }
+
+  .subtotal {
+    font-size: 12px;
   }
 
   #their_total {
@@ -100,7 +105,8 @@
   .savings {
     clear: both;
     font-weight: 200;
-    padding: 20px 0 4px;
+    /*padding: 20px 0 4px;*/
+    color: #7ABC17;
   }
 
   #password {
@@ -148,6 +154,43 @@
     background: #555;
   }
 
+  #card_brand_image {
+    height: 1em;
+  }
+
+  .bill-ship-summary {
+    padding-top: 20px;
+    clear: both;
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+  }
+
+  #variants {
+    float: left;
+    text-align: left;
+  }
+
+  #quantity {
+    float: right;
+    text-align: right;
+  }
+
+  #quantity-and-variants {
+    font-size: 12px;
+    overflow: hidden;
+    margin-top: 4px;
+    color: #FEFEFE;
+  }
+
+  #missing-variants{
+    margin-top: 4px;
+    color: red;
+    display: none;
+    font-size: 14px;
+    text-align: center;
+  }
+
 </style>
 
 <!-- <link rel="stylesheet" href="../options/options.css"> -->
@@ -160,26 +203,38 @@
 
   <form id="buy-form" class="form-horizontal" method="post" novalidate>
     <div class="form-center">
-      <div id="title"></div>
-      <div id="shipping_methods"></div>
-      <div class="hidden">
+      <div class="item-container">
+        <div id="title"></div>
+        <div class="hide1" id="quantity-and-variants">
+          <div id="variants"></div>
+          <div id="quantity"></div>
+        </div>
+      </div>
+      <div id="missing-variants">Please select a specific variant of this item.</div>
+      <div class="hide1" id="shipping_methods"></div>
+
+
+      <div class="hide2">
         <div id="confirmation">
           <div id="description">
-
             <div class="our total">
               <h2>Zinc</h2>
               <span id="our_total"></span>
+              <div class="savings">Save <span id="savings"></span>!</div>
             </div>
             <div class="their total">
               <h2><span id="retailer"></span></h2>
               <span id="their_total"></span>
+              <div class="subtotal">
+                <span id="their_price"></span> + <span id="their_tax"></span> tax + <span id="their_shipping"></span> shipping
+              </div>
             </div>
-
-            <div class="savings">You save <span id="savings"></span>!</div>
-
-            <!-- <span id='their_price'></span> subtotal + <span id='their_shipping'></span> shipping + <span id='their_tax'></span> tax) -->
-
           </div>
+        </div>
+        <div class="bill-ship-summary">
+          <div id="billing_summary">Pay with <img id="card_brand_image"> ending in <strong><span id="last_four"></span></div></strong>
+          <div id="shipping_summary">Ship to <strong><span id="shipping_address_line1"></span></strong></div>
+          <div><a href="" class="to_options">Edit</a></div>
         </div>
         <div class="form-group">
             <input class="form-required form-control" id="password" type="password" name="password" placeholder="Password" required>
@@ -199,7 +254,7 @@
   </form>
 
   <div class="submit-wrapper" id="registration" style='display:none'>
-    <button id="register">Join the Party</button>
+    <button class="to_options" id="register">Join the Party</button>
   </div>
 
 </div>

@@ -1,5 +1,5 @@
-// DOMAIN = "http://localhost:5000";
-DOMAIN = "https://api.zinc.io";
+DOMAIN = "http://localhost:5000";
+// DOMAIN = "https://api.zinc.io";
 
 get_object_from_form = function(form_selector) {
   var inputs = $(form_selector + " :input");
