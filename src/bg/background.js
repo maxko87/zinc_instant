@@ -30,14 +30,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     console.log(request);
     tab_content_map[sender.tab.id] = request;
   }
-  else if (request.disable_tab){
+  else if (request._type == 'disable_tab'){
     delete tab_content_map[sender.tab.id];
   }
-  // else if (request._type == 'reinject'){
-  //   console.log('reinject');
-  //   tab_id = sender.tab.id;
-  //   chrome.tabs.executeScript(tab_id, {file: "src/inject/inject.js"});
-  // }
   update_tab_map(sender.tab);
 });
 

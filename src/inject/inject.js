@@ -1,12 +1,35 @@
-MAX_SELECTORS = 2; // so it's an individual product page
+inUrl = function(s){
+  if (window.location.href.indexOf(s) > -1)
+    return true;
+  return false
+}
 
-retailers = [
+inject_conditions = {
+  'macys': inUrl('macys.com') && inUrl('ID='), 
+  'victorias_secret': inUrl('victoriassecret.com') && inUrl('ProductID')
+}
+
+retailers = {
+  'macys': {
+    'retailer_name': "Macy's", 
+    'title_selector': '#productTitle', 
+    'price_selector': '.standardProdPricingGroup > span:last',
+    'quantity_selector': '.productQuantity',
+    'variants_selectors': ['.productColor', '.sizes .selected']
+  },
+  'victorias_secret': {
+    'retailer_name': "Victoria's Secret", 
+    'title_selector': '.name h1', 
+    'price_selector': '.price p',
+    'quantity_selector': '.qty a.selected',
+    'variants_selectors': ['.color .selected:first', '.size .selected:first']
+  }
+}
+
+// retailers = 
   // ['amazon',          '#title',              '#priceblock_ourprice'],
   // ['amazon',          '#btAsinTitle',        '#actualPriceValue'],
   // ['amazon',          'BLANK',               '#priceblock_saleprice'],
-  ["Macy's",          '#productTitle',       '.standardProdPricingGroup > span:last', '.productQuantity',
-    ['.productColor', '.sizes .selected']
-  ],
   // ['ebay',            '#itemTitle',          '#prcIsum'],
   // ['walmart',         '.productTitle',       '.bigPriceText1'],
   // ['bestbuy',         '#sku-title',          '.item-price'],
@@ -15,7 +38,6 @@ retailers = [
   // ['home_depot',      '.product_title',      '#ajaxPrice'],
   // ['zappos',          '.banner',             '#priceSlot'],
   // ['gap',             '.productName',        '#priceText'],
-  // ['victorias_secret','.name h1',            '.price p'],
   // ['forever_21',      '.product-title',      '.product-price'],
   // ['net_a_porter',    '#product-details h1', '#price'],
   // ['shopbop',         '.product-title',      '.priceBlock'],
@@ -35,24 +57,18 @@ retailers = [
   // ['ae',              '.pName',              '.mainEquity .price'],
   // ['bebe',            '.crumb.last',         '.currentPrice'],
   // ['squishable',      '#itemTitle',          '.itemPrice']
-]
-
-var title = null;
-var price = null;
-var title_selector = null;
-var price_selector = null;
-var retailer = null;
+// ]
 
 get_title = function(title_selector){
-  var title = document.querySelector(title_selector).innerText;
+  var title = $(title_selector).text();
   return title;
 }
 
 get_price = function(price_selector){
   // var price = document.querySelector(price_selector).innerText;
   var price = $(price_selector).text();
-  if (price.indexOf('-') > -1){
-    price = price.substring(price.indexOf('-'));
+  if (price.lastIndexOf('$') > -1){
+    price = price.substring(price.lastIndexOf('$'));
   }
   price = price.replace(/[^0-9]/g, '');
   return price;
@@ -60,6 +76,9 @@ get_price = function(price_selector){
 
 get_quantity = function(quantity_selector){
   var quantity = $(quantity_selector).val();
+  if (quantity == ""){
+    quantity = $(quantity_selector).text();
+  }
   return quantity;
 }
 
@@ -67,57 +86,56 @@ get_variants = function(variants_selectors){
   var variants = [];
   for (var i=0; i<variants_selectors.length; i++){
     variants_selector = variants_selectors[i];
-    variant = $(variants_selector).text();//.replace(/^[^a-zA-Z0-9]*$/g, '');
+    variant = $(variants_selector).text().replace(/^[^a-zA-Z0-9\.\ ]*$/g, '').trim().replace(/\ /, " ");
     variants.push(variant);
   }
   return variants;
 }
 
-$(document).ready(function(){
+attempt_popup_for_retailer = function(retailer_code){
+  var retailer_name = retailers[retailer_code].retailer_name;
+  var title_selector = retailers[retailer_code].title_selector;
+  var price_selector = retailers[retailer_code].price_selector;
+  var quantity_selector = retailers[retailer_code].quantity_selector;
+  var variants_selectors = retailers[retailer_code].variants_selectors;
+  // console.log(title_selector);
+  // console.log(price_selector);
+  // console.log(quantity_selector);
+  // console.log(variants_selectors);
 
-  console.log('ready');
+  setInterval(function(){
+    var title = get_title(title_selector);
+    var price = get_price(price_selector);
+    var quantity = get_quantity(quantity_selector);
+    var variants = get_variants(variants_selectors);
 
-  for (i=0; i<retailers.length; i++){
-    retailer = retailers[i][0];
-    title_selector = retailers[i][1];
-    if (document.querySelector(title_selector) && document.querySelectorAll(title_selector).length <= MAX_SELECTORS) {
-      title = get_title(title_selector);
-      break;
-    }
-  }
+    // console.log(title);
+    // console.log(price);
+    // console.log(quantity);
+    // console.log(variants);
 
-  //ensures we fuzzy match
-  for (var i=0; i<retailers.length; i++){
-    price_selector = retailers[i][2];
-    if ($(price_selector).length > 0){
-      price = get_price(price_selector);
-      break;
-    }
-  }
-
-  console.log('recognized retailer: ' + retailer);
-  console.log(title);
-  console.log(price);
-
-  quantity_selector = retailers[i][3];
-  variants_selectors = retailers[i][4];
-
-  // ensures we use a supported retailer
-  // selector = price_selectors[i];
-  // if (document.querySelector(selector) && document.querySelectorAll(selector).length <= MAX_SELECTORS) {
-
-  if (title && price){
-    setInterval(function(){
-      title = get_title(title_selector);
-      price = get_price(price_selector);
-      quantity = get_quantity(quantity_selector);
-      variants = get_variants(variants_selectors);
-      message = {'_type': 'set_popup_contents', 'retailer': retailer, 'title': title, 'price': price, 'quantity': quantity, 'variants': variants}
+    if (title && price){
+      message = {'_type': 'set_popup_contents', 'retailer_code': retailer_code, 'retailer_name': retailer_name, 'title': title, 'price': price, 'quantity': quantity, 'variants': variants}
       chrome.runtime.sendMessage(message);
-    }, 300);
-  }
-  else {
-    chrome.runtime.sendMessage({disable_tab: true});
-  }
+    }
+    else{
+      chrome.runtime.sendMessage({'_type': 'disable_tab'});
+    }
+  }, 300);
+}
 
-});
+
+waitForJquery = setInterval(function(){
+  console.log('waiting for jquery');
+  if (window.$) {
+    console.log('loaded jquery');
+    for (retailer_code in inject_conditions){
+      condition = inject_conditions[retailer_code];
+      if (condition) {
+        console.log('starting popup for ' + retailer_code);
+        attempt_popup_for_retailer(retailer_code);
+      }
+    }
+    clearInterval(waitForJquery);
+  }
+}, 200);

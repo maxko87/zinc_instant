@@ -71,11 +71,6 @@
     overflow: hidden;
   }
 
-  .total {
-    float: left;
-    width: 100px;
-  }
-
   .total h2 {
     margin: 0;
   }
@@ -83,6 +78,7 @@
   .our.total {
     float: left;
     text-align: left;
+    width: 100px;
   }
 
   .our.total h2 {
@@ -92,7 +88,13 @@
   .their.total {
     float: right;
     text-align: right;
+    width: 150px;
   }
+
+  .their.total h2{
+    font-size: 24px;
+  }
+
 
   .subtotal {
     font-size: 12px;
@@ -210,7 +212,7 @@
           <div id="quantity"></div>
         </div>
       </div>
-      <div id="missing-variants">Please select a specific variant of this item.</div>
+      <div id="missing-variants">Please select the specific attributes of item (color, size, quantity, etc.)</div>
       <div class="hide1" id="shipping_methods"></div>
 
 

@@ -51,7 +51,7 @@ popup_info_received_callback = function(data){ // TODO: less global vars..
 
   // set constant stuff
   $('#title').text(title);
-  $('#retailer').text(retailer);
+  $('#retailer').text(retailer_name);
   $('#quantity').text(quantity);
   $('#variants').text(variants.join(', '));
 
@@ -135,7 +135,8 @@ $(document).ready(function(){
 
     //pull and set fixed data values
     var tab_content_map = chrome.extension.getBackgroundPage().tab_content_map;
-    retailer = tab_content_map[tab.id].retailer;
+    retailer_code = tab_content_map[tab.id].retailer_code;
+    retailer_name = tab_content_map[tab.id].retailer_name;
     title = tab_content_map[tab.id].title;
     their_price_raw = tab_content_map[tab.id].price;
     quantity = tab_content_map[tab.id].quantity;
@@ -143,7 +144,7 @@ $(document).ready(function(){
 
     // API call to get tax, shipping method, etc information
     $('.spinner').css('display', 'block');
-    var data = {'email': safe_get('email'), 'retailer': retailer, 'their_price_raw': their_price_raw};
+    var data = {'email': safe_get('email'), 'retailer_code': retailer_code, 'their_price_raw': their_price_raw};
     $.post(DOMAIN + "/v0/instant_get_popup_info", JSON.stringify(data))
     .done(function (data){
       $('.spinner').css('display', 'none');
